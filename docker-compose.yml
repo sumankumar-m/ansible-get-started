@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  apache:
+    build: .
+    container_name: apache-web-server
+    ports:
+      - "8080:80"   # Apache web server (HTTP)
+      - "2222:22"   # SSH access (for Ansible)
+    networks:
+      - apache_network
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+
+networks:
+  apache_network:
+    driver: bridge
